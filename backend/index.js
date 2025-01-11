@@ -3,8 +3,9 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const fs = require("fs");
 const csv = require("csv-parser");
+import { config } from "dotenv"
 
-dotenv.config();
+config();
 const app = express();
 
 app.use(cors());
@@ -69,4 +70,4 @@ app.get("/api/inventory", (req, res) => {
     });
 });
 
-app.listen(3000, () => console.log(`Server running on http://localhost:3000`));
+app.listen(process.env.PORT, () => console.log(`Server running on http://localhost:${process.env.PORT}`));
