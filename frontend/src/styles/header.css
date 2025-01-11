@@ -1,0 +1,83 @@
+.header{
+    position: sticky;
+    top: 0;
+    max-width: 100%;
+    height: auto;
+    background-color: #404041;
+    padding: 10px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    z-index: 10;
+}
+
+.header_logo_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.header_logo{
+    width: 46px;
+    height: auto;
+}
+
+.header_Title{
+    font: 600 20px 'helvetica';
+    color: #fff;
+}
+
+.header_adminView{
+    font: 600 10px 'helvetica';
+    color: #393939;
+    padding: 3px 7px;
+    background-color: #fff;
+    border-radius: 40px;
+}
+
+.header_support_user{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.header_support{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.header_support_image{
+    width: 20px;
+    height: auto;
+}
+
+.header_support_text{
+    font: 600 15px 'helvetica';
+    color: #fff;
+}
+
+.header_user{
+    background-color: #242424 ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 10px;
+    gap: 12px;
+    border-radius: 10px;
+}
+
+.header_user_image{
+    width: 32px;
+    height: auto;
+    border-radius: 100px;
+}
+
+.header_user_name{
+    font: 600 15px 'helvetica';
+    color: #fff;
+}

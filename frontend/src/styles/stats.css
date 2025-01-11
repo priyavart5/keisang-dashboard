@@ -1,0 +1,19 @@
+.ant-card-body{
+    padding: 12px !important;
+}
+
+p{
+    font: 600 14px 'helvetica';
+    color: #000;
+}
+
+.stats_value{
+    font: 500 20px 'helvetica';
+    color: #000000;
+    margin-bottom: 6px !important;
+}
+
+.stats_title{
+    font: 500 14px 'helvetica';
+    color: #FF9926;
+}

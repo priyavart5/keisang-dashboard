@@ -1,0 +1,43 @@
+.Inventory_Count{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 40px;
+}
+
+.Inventory_Count_filters{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.Inventory_Count_head{
+    font: 600 16px 'helvetica';
+    color: #000;
+}
+
+.Inventory_Count_buttons{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.Inventory_Count_button{
+    padding: 10px 16px;
+    border: 1px solid #FF9926;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    font: 600 12px 'helvetica';
+}
+
+.Inventory_Count_button_active{
+    border: none;
+    background-color: #FF9926;
+    color: #fff;
+}
+
+.chart{
+    height: 400px !important;
+}

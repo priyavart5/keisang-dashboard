@@ -1,0 +1,52 @@
+.app{
+  max-width: 100vw;
+  height: auto;
+  margin: 0 !important;
+  background-color: #F5F5F5;
+}
+
+.innerContainer{
+  max-width: 100vw;
+  height: auto;
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.Inventory_Top_Section{
+  width: 100%;
+  height: auto;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #D2D2D2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Inventory_Top_Text{
+  font: 500 34px 'helvetica';
+  color: #393939;
+}
+
+.Inventory_Top_Filter_CTA{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: #fff;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.Inventory_Top_Filter_Img{
+  width: 18px;
+  height: auto;
+}
+
+.Inventory_Top_Filter_text{
+  font: 600 11px 'helvetica';
+  color: #393939;
+}
+
