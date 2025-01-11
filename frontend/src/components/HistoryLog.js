@@ -1,5 +1,6 @@
 import React from "react";
 import { Table } from "antd";
+import '../styles/history.css';
 
 const parsePrice = (price) => {
   const priceValue = price.replace(" USD", "").replace(",", "");

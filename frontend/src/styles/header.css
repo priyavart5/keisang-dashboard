@@ -1,3 +1,5 @@
+
+
 .header{
     position: sticky;
     top: 0;
@@ -11,6 +13,8 @@
     gap: 20px;
     z-index: 10;
 }
+
+
 
 .header_logo_container{
     display: flex;
@@ -80,4 +84,15 @@
 .header_user_name{
     font: 600 15px 'helvetica';
     color: #fff;
+}
+
+@media only screen and (max-width: 540px) {
+    .header{
+        padding: 10px 10px;
+        gap: 10px;
+    }
+
+    .header_adminView, .header_support{
+        display: none;
+    }
 }
