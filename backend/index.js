@@ -12,7 +12,7 @@ app.use(cors());
 
 app.get("/api/inventory", (req, res) => {
   const results = [];
-  fs.createReadStream("data/sample-data.csv")
+  fs.createReadStream("./data/sample-data.csv")
     .pipe(csv())
     .on("data", (data) => results.push(data))
     .on("end", () => {
