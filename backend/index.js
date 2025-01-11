@@ -3,7 +3,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const fs = require("fs");
 const csv = require("csv-parser");
-import { config } from "dotenv"
+const { config } = require("dotenv");
 
 config();
 const app = express();
