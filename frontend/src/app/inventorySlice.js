@@ -5,7 +5,7 @@ export const fetchInventory = createAsyncThunk(
   "inventory/fetchInventory",
   async (filters) => {
     const { make, duration } = filters;
-    const response = await axios.get(`${process.env.REACT_APP_BACKEND_API}api/inventory`, {
+    const response = await axios.get('http://localhost:3000/api/inventory', {
       params: { make, duration },
     });
     return response.data;
