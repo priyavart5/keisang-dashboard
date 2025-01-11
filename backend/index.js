@@ -3,71 +3,87 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const fs = require("fs");
 const csv = require("csv-parser");
-const { config } = require("dotenv");
+const path = require("path");
 
-config();
+dotenv.config();
+
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
+const getFilterDate = (duration, now) => {
+  const filterDate = new Date(now);
+  switch (duration) {
+    case "Last Month":
+      filterDate.setMonth(now.getMonth() - 1);
+      break;
+    case "This Month":
+      filterDate.setMonth(now.getMonth());
+      break;
+    case "Last 3 Months":
+      filterDate.setMonth(now.getMonth() - 3);
+      break;
+    case "Last 6 Months":
+      filterDate.setMonth(now.getMonth() - 6);
+      break;
+    case "This Year":
+      filterDate.setFullYear(now.getFullYear());
+      break;
+    case "Last Year":
+      filterDate.setFullYear(now.getFullYear() - 1);
+      break;
+    default:
+      break;
+  }
+  return filterDate;
+};
+
 app.get("/api/inventory", (req, res) => {
   const results = [];
-  fs.createReadStream("./sample-data.csv")
+  const csvFilePath = path.resolve(__dirname, "sample-data.csv");
+
+  if (!fs.existsSync(csvFilePath)) {
+    return res.status(404).json({ error: "CSV file not found" });
+  }
+
+  fs.createReadStream(csvFilePath)
     .pipe(csv())
     .on("data", (data) => results.push(data))
     .on("end", () => {
-      let filteredData = results;
+      try {
+        let filteredData = results;
+        const { make, duration } = req.query;
 
-      let { make, duration } = req.query;
+        if (make) {
+          const makeArray = Array.isArray(make) ? make : [make];
+          filteredData = filteredData.filter((item) =>
+            makeArray.includes(item.brand)
+          );
+        }
 
-      if (make) {
-        make = Array.isArray(make) ? make : [make];
-        filteredData = filteredData.filter((item) => make.includes(item.brand));
-      }
+        if (duration) {
+          const durationArray = Array.isArray(duration)
+            ? duration
+            : [duration];
+          const now = new Date();
 
-      if (duration) {
-        duration = Array.isArray(duration) ? duration : [duration];
-        const now = new Date();
-
-        filteredData = filteredData.filter((item) => {
-          const date = new Date(item.timestamp);
-          let shouldInclude = false;
-
-          duration.forEach((dur) => {
-            const filterDate = new Date(now);
-
-            switch (dur) {
-              case "Last Month":
-                filterDate.setMonth(now.getMonth() - 1);
-                break;
-              case "This Month":
-                filterDate.setMonth(now.getMonth());
-                break;
-              case "Last 3 Months":
-                filterDate.setMonth(now.getMonth() - 3);
-                break;
-              case "Last 6 Months":
-                filterDate.setMonth(now.getMonth() - 6);
-                break;
-              case "This Year":
-                filterDate.setFullYear(now.getFullYear());
-                break;
-              case "Last Year":
-                filterDate.setFullYear(now.getFullYear() - 1);
-                break;
-            }
-
-            if (date >= filterDate) {
-              shouldInclude = true;
-            }
+          filteredData = filteredData.filter((item) => {
+            const itemDate = new Date(item.timestamp);
+            return durationArray.some((dur) => itemDate >= getFilterDate(dur, now));
           });
+        }
 
-          return shouldInclude;
-        });
+        res.json(filteredData);
+      } catch (error) {
+        res.status(500).json({ error: "Error processing data" });
       }
-
-      res.json(filteredData);
+    })
+    .on("error", (error) => {
+      res.status(500).json({ error: "Error reading CSV file", details: error.message });
     });
 });
 
-app.listen(process.env.PORT, () => console.log(`Server running on http://localhost:${process.env.PORT}`));
+app.listen(PORT, () =>
+  console.log(`Server running on http://localhost:${PORT}`)
+);
